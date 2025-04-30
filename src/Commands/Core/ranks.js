@@ -16,7 +16,7 @@ module.exports = {
             const text = `
 🔧 *Ranks*
 
-🌟 *Ranks are a way to display a user's progress in the Aurora bots ecosystem.*
+🌟 *Ranks are a way to display a user's progress in the yurie bots ecosystem.*
 💚 *Ranking is based on the amount of Experience points a user has earned.*
 🧧 *Ranking up will reward the user with credits and certain abilities.*
 
