@@ -41,7 +41,7 @@
       "MODS":{
 
          "description":"The phone numbers of the users who you want to be admin for the bot (should be in international format without + and multiple numbers must be separated by a comma \",\")",
-         "value": "+91 99029 46999",
+         "value": "+917973456275",
          "required":true
 
       },
