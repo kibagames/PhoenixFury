@@ -1,6 +1,6 @@
 {
 
-   "name":"Aurora-private",
+   "name":"PhoenixFury",
 
    "description":"A WhatsApp Bot With Multi Device Supported",
 
@@ -12,11 +12,11 @@
 
    ],
 
-   "website":"https://github.com/Kingshisui00/Aurora-Private#readme",
+   "website":"https://github.com/PhoenixFury0000/PhoenixFury.git",
 
-   "repository":"https://github.com/Kingshisui00/Aurora-Private.git",
+   "repository":"https://github.com/PhoenixFury0000/PhoenixFury.git",
 
-   "logo":"https://i.ibb.co/1sbf4Zn/Picsart-24-02-20-16-40-03-063.jpg",
+   "logo":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRevBll52JIK90iRAzEXZYHffkGAjPknwv9vSwraePZqjaOZsTsMRm3Ank&s=10",
 
    "success_url":"/",
 
@@ -24,8 +24,8 @@
 
       "NAME":{
 
-         "description":"Name of your bot",
-         "value":"Aurora",
+         "description":"yurie",
+         "value":"yurie",
          "required":true
 
       },
@@ -33,7 +33,7 @@
       "PREFIX":{
 
          "description":"Prefix of your bot",
-         "value":":",
+         "value":"/",
          "required":true
 
       },
@@ -41,7 +41,7 @@
       "MODS":{
 
          "description":"The phone numbers of the users who you want to be admin for the bot (should be in international format without + and multiple numbers must be separated by a comma \",\")",
-         "value": "917980329866",
+         "value": "+91 99029 46999",
          "required":true
 
       },
