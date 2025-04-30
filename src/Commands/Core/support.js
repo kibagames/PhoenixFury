@@ -10,7 +10,7 @@ module.exports = {
   async execute(client, arg, M) {
       try {
           // Group links message
-          const supportG = `*━『 Aurora Group Links 』━*
+          const supportG = `*━『 yurie Group Links 』━*
           
 • *[ yurie Support ]*
 Link: https://chat.whatsapp.com/FpJ4aiTVkyHHtqTIR960xX
