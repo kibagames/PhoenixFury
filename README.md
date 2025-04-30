@@ -411,7 +411,7 @@ since **whatsapp-bot** use [baileys](https://github.com/WhiskeySockets/Baileys) 
 
 ---
 
-<h2 align="center">🔰 Meet Team Aurora🔰
+<h2 align="center">🔰 Meet Team phoenix🔰
 </h2>
 
 
