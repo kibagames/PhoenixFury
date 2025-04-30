@@ -17,7 +17,7 @@ Phoenix
 ## [![Typing SVG](https://readme-typing-svg.herokuapp.com?font=Rockstar-ExtraBold&color=FF0000&lines=ɪ'ᴍ+phoenix-ʙᴏᴛ+ᴀɴ+ᴀɪ+ʙᴏᴛ;ᴍᴀᴅᴇ+ʙʏ+ᴛᴇᴀᴍ-phoenix;ᴅᴇʟɪɢʜᴛ+ᴡᴇʟᴄᴏᴍᴇ+ᴛᴏ+ᴇᴠᴇʀʏᴏɴᴇ;ᴛʜᴇ+ғᴜᴛᴜʀᴇ+ɪꜱ+ʜᴇʀᴇ;ʜᴀᴠᴇ+ᴀ+ɢᴏᴏᴅ+ᴅᴀʏ;ᴛᴏ+ɢᴇᴛ+ʏᴏᴜʀ+ᴡʜᴀᴛꜱᴀᴘᴘ+ɴᴇꭗᴛ+ʟᴇᴠᴇʟ;aurora-ʙᴏᴛ+ᴍᴜʟᴛɪᴘʟᴇ+ᴅᴇᴠɪᴄᴇꜱ.)](https://git.io/typing-svg)
 <br>
 <div align="center">
-<a href="https://chat.whatsapp.com/DrY5MBaiDRS9BAcpCpJQCv" target="blank"><img src="https://img.shields.io/badge/GC link-000000?style=for-the-badge&logo=whatsapp&logoColor=white" height="25px"/></a>
+<a href="https://chat.whatsapp.com/L3J8tp04lzUBZbd1bTitSI" target="blank"><img src="https://img.shields.io/badge/GC link-000000?style=for-the-badge&logo=whatsapp&logoColor=white" height="25px"/></a>
 <a href="https://chat.whatsapp.com/DrY5MBaiDRS9BAcpCpJQCv" target="blank"><img src="https://img.shields.io/badge/Creator's - Team phoenix-000000?style=for-the-badge&logo=github&logoColor=white" height="25px"/></a>  </a>
   <br>
 
