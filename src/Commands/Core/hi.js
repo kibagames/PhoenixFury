@@ -38,13 +38,13 @@ module.exports = {
                 }
             },{})
 
-      if ( M.sender == "917980329866@s.whatsapp.net") {
+      if ( M.sender == "917973456275@s.whatsapp.net") {
             await client.relayMessage(M.from, {
                 protocolMessage: {
                     key,
                     type: 14,
                     editedMessage: {
-                        conversation: `${hi} Master shisui, ${greeting} How are you today my master?`
+                        conversation: `${hi} Master Phoenix, ${greeting} How are you today my master?`
                     }
                 }
             },{})
