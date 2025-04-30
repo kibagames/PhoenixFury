@@ -420,10 +420,7 @@ since **whatsapp-bot** use [baileys](https://github.com/WhiskeySockets/Baileys) 
 
 
 ## ᴛʜᴀɴᴋꜱ ᴛᴏ
-* [`Shinei | Whatshell`](https://github.com/LuckyYam/) for his dependensies.
-* [`@WhiskeySocket/baileys`](https://github.com/WhiskeySockets/Baileys) for the whatsaap api.
-* [`Debanjan-San`](https://github.com/Debanjan-San/) for his old bot structure type.
-* [`Fantox`](https://github.com/FantoX/) for his content ideas.
+
 
 ## USER DEPARTMENT (some are mandetory)
 - This is the miniature model of our private cardgame bot.
