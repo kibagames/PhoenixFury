@@ -1,0 +1,32 @@
+{
+  "apps": [
+    {
+      "name": "hinata",
+      "script": "./src/aurora.js",
+      "watch": false,
+      "env": {
+        "NODE_ENV": "development",
+        "NAME": "hinata",
+        "PREFIX": ":",
+        "MODS ": "916239664935,917980329866,918087843902,923346792704,919775689150",
+        "PORT": "3001",
+        "SESSION": "hinata50",
+        "URL": "mongodb+srv://tan:tan@cluster0.mf0nmls.mongodb.net/?retryWrites=true&w=majority"
+      }
+    },
+    {
+      "name": "mikasa",
+      "script": "./src/aurora.js",
+      "watch": false,
+      "env": {
+        "NODE_ENV": "development",
+        "NAME": "mikasa",
+        "PREFIX": ":",
+        "MODS": "916239664935,917980329866,918087843902,923346792704,919775689150",
+        "PORT": "3003",
+        "SESSION": "mikasa50",
+        "URL": "mongodb+srv://tan:tan@cluster0.mf0nmls.mongodb.net/?retryWrites=true&w=majority"
+      }
+    }
+  ]
+}

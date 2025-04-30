@@ -1,0 +1,194 @@
+const axios = require("axios");
+const fs = require('fs').promises;
+const path = require('path');
+
+// Define a Map to track Pokémon evolution responses
+const pokemonEvolutionResponse = new Map();
+
+// Get the evolution chain of a given Pokémon
+const getPokemonEvolutionChain = async (pokemon) => {
+    try {
+        // Fetch the Pokémon species data
+        const speciesData = await axios.get(
+            `https://pokeapi.co/api/v2/pokemon-species/${pokemon}`
+        );
+
+        // Fetch the evolution chain data
+        const evolutionData = await axios.get(speciesData.data.evolution_chain.url);
+        const { chain } = evolutionData.data;
+
+        const line = [];
+        const evolutions = [];
+
+        // Add the base Pokémon to the evolution line
+        line.push(chain.species.name);
+
+        // Process the evolution stages
+        if (chain.evolves_to.length) {
+            const second = [];
+            chain.evolves_to.forEach((pkm) => second.push(pkm.species.name));
+            if (second.length === 1) line.push(second[0]);
+            else line.push(second);
+
+            // Process the second evolution stage
+            if (chain.evolves_to[0].evolves_to.length) {
+                const third = [];
+                chain.evolves_to[0].evolves_to.forEach((pkm) => third.push(pkm.species.name));
+                if (third.length === 1) line.push(third[0]);
+                else line.push(third);
+            }
+        }
+
+        // Flatten the evolution chain and remove any nested arrays
+        for (const pokemon of line) {
+            if (Array.isArray(pokemon)) {
+                pokemon.forEach((x) => evolutions.push(x));
+                continue;
+            }
+            evolutions.push(pokemon);
+        }
+
+        return evolutions;
+    } catch (error) {
+        console.error(error);
+        throw new Error("Failed to fetch evolution chain");
+    }
+};
+
+module.exports = {
+    name: "evolve",
+    aliases: ["evolution"],
+    exp: 2,
+    cool: 5,
+    react: "🟩",
+    category: "pokemon",
+    usage: 'Use :evolve to evolve the first Pokémon in your party, :evolve --list to get evolution list, :evolve --confirm/--cancel to confirm or cancel evolution.',
+    description: "To view your party's evolution list or evolve a Pokémon.",
+
+    async execute(client, arg, M) {
+        const user = M.sender;  // User who sent the command
+
+        // Handle --list argument: Shows evolution chain of the Pokémon
+        if (arg === '--list') {
+            const party = await client.pkmn.get(`${user}_Party`);
+            const pkmn = party[0];  // First Pokémon in the party
+            const evolutions = await getPokemonEvolutionChain(pkmn.name);
+
+            let text = `*Evolution Chain of ${pkmn.name}*\n`;
+
+            if (evolutions.length < 1) {
+                text += `${pkmn.name} has no evolutions.`;
+            } else {
+                text += evolutions.map((evo, index) => `${index + 1}. ${evo}`).join('\n');
+            }
+
+            return M.reply(text);
+        }
+
+        // Handle evolution
+        if (arg === '--confirm' || arg === '--cancel') {
+            const userResponse = arg;
+            const evolutionData = pokemonEvolutionResponse.get(user);
+
+            if (!evolutionData) {
+                return M.reply('⚠️ No evolution is currently pending.');
+            }
+
+            const { pokemon, group } = evolutionData;
+            const party = await client.pkmn.get(`${user}_Party`);
+            const pkmn = party.find(p => p.name === pokemon);
+            const evolutions = await getPokemonEvolutionChain(pkmn.name);
+
+            const currentEvolutionIndex = evolutions.findIndex(evo => evo === pkmn.name) + 1;
+            const nextEvolution = evolutions[currentEvolutionIndex];
+
+            if (!nextEvolution) {
+                return M.reply('⚠️ This Pokémon cannot evolve further.');
+            }
+
+            if (userResponse === '--confirm') {
+                const pokemonEvolutionChain = await axios.get(
+                    'https://shiui-ff2daa3f5778.herokuapp.com/poke/chains'
+                );
+
+                const chain = pokemonEvolutionChain.data.filter((x) => evolutions.includes(x.species_name));
+                const chainIndex = chain.findIndex((x) => x.species_name === nextEvolution);
+
+                if (chainIndex < 0 || chain[chainIndex].trigger_name !== 'level-up') {
+                    return M.reply('⚠️ Evolution can only be triggered by leveling up.');
+                }
+
+                if (pkmn.level < chain[chainIndex].min_level) {
+                    return M.reply(`⚠️ ${pkmn.name} needs to be at level ${chain[chainIndex].min_level} to evolve.`);
+                }
+
+                // Evolving Pokémon
+                const pkmnData = await axios.get(`https://pokeapi.co/api/v2/pokemon/${nextEvolution}`);
+                pkmn.name = pkmnData.data.name;
+                pkmn.image = pkmnData.data.sprites.other['official-artwork'].front_default;
+                pkmn.id = pkmnData.data.id;
+
+                // Update Pokémon stats
+                const { hp, attack, defense, speed } = await client.utils.getPokemonStats(pkmn.id, pkmn.level);
+                pkmn.hp = hp;
+                pkmn.speed = speed;
+                pkmn.defense = defense;
+                pkmn.attack = attack;
+
+                // Update party and database
+                const i = party.findIndex(p => p.tag === pkmn.tag);
+                party[i] = pkmn;
+
+                await client.DB.updateUser(user, 'party', 'set', party);
+                await client.DB.updateUser(user, 'companion', 'set', pkmn.name);
+
+                // Send confirmation message
+                const buffer = await client.utils.getBuffer(pkmn.image);
+                await client.sendMessage(group, {
+                    image: buffer,
+                    jpegThumbnail: buffer.toString('base64'),
+                    caption: `Congrats! Your Pokémon *${pkmn.name}* has evolved!`,
+                    mentions: [user]
+                });
+
+                // Clear evolution response after completion
+                pokemonEvolutionResponse.delete(user);
+
+            } else if (userResponse === '--cancel') {
+                pokemonEvolutionResponse.delete(user);
+                M.reply('⚠️ Evolution has been cancelled.');
+            }
+            return;
+        }
+
+        // Default behavior: Handle evolution initiation
+        const party = await client.pkmn.get(`${user}_Party`);
+        const pkmn = party[0];
+        const evolutions = await getPokemonEvolutionChain(pkmn.name);
+
+        if (evolutions.length < 1) {
+            return M.reply(`${pkmn.name} has no evolutions.`);
+        }
+
+        const nextEvolution = evolutions[1];  // Next evolution in the chain
+
+        if (!nextEvolution) {
+            return M.reply(`${pkmn.name} cannot evolve further.`);
+        }
+
+        // Start evolution process
+        const text = `*${user.split('@')[0]}*, your Pokémon *${pkmn.name}* is evolving to *${nextEvolution}*.\n\nUse *${client.prefix}evolve --confirm* to proceed with the evolution or *--cancel* to cancel. (60 seconds to confirm)`;
+
+        await client.sendMessage(M.from, { text, mentions: [user] });
+
+        // Save the evolution response in memory
+        pokemonEvolutionResponse.set(user, { group: M.from, pokemon: pkmn.name });
+
+        setTimeout(() => {
+            if (pokemonEvolutionResponse.has(user)) {
+                pokemonEvolutionResponse.delete(user);
+                M.reply('⚠️ Evolution time expired. No action was taken.');
+            }
+        }, 60000);  // 60 seconds timeout for confirmation
+    }
+};

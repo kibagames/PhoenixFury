@@ -1,0 +1,301 @@
+const duelMap = new Map();
+
+const spells = {
+    fireball: { 
+        description: "Deals 30 damage", 
+        damage: 30, 
+        cooldown: 2, 
+        speed: 5 
+    },
+    lightning: { 
+        description: "Deals 25 damage", 
+        damage: 25, 
+        cooldown: 1, 
+        speed: 7 
+    },
+    heal: { 
+        description: "Heals 20 HP", 
+        heal: 20, 
+        cooldown: 3, 
+        speed: 6 
+    },
+    clone: { 
+        description: "Creates a clone to absorb the next attack", 
+        special: 'clone', 
+        cooldown: 5, 
+        speed: 4 
+    },
+    void: { 
+        description: "Deals 20 damage bypassing defense", 
+        damage: 20, 
+        bypassDefense: true, 
+        cooldown: 4, 
+        speed: 3 
+    },
+    iceSpike: { 
+        description: "Deals 20 damage and slows opponent's speed by 5 for 2 turns", 
+        damage: 20, 
+        slow: 5, 
+        cooldown: 3, 
+        speed: 4 
+    },
+    shield: { 
+        description: "Increases defense by 10 for 2 turns", 
+        defense: 10, 
+        cooldown: 4, 
+        speed: 2 
+    },
+    poison: { 
+        description: "Poisons the opponent, dealing 5 damage per turn for 3 turns", 
+        dot: { damage: 5, duration: 3 }, 
+        cooldown: 4, 
+        speed: 4 
+    }
+};
+
+const determineTurnOrder = (player1, player2, spell1, spell2) => {
+    const speed1 = spells[spell1].speed + player1.agility;
+    const speed2 = spells[spell2].speed + player2.agility;
+
+    if (speed1 > speed2) {
+        return [player1, player2];
+    } else if (speed2 > speed1) {
+        return [player2, player1];
+    } else {
+        // In case of a tie, use some random logic or prioritize based on another stat
+        return Math.random() > 0.5 ? [player1, player2] : [player2, player1];
+    }
+};
+
+const createDuel = (challenger, challenged) => ({
+    challenger: { id: challenger, health: 100, speed: 10, defense: 5, agility: 5, mana: 100, cooldowns: {}, clone: false, poison: { active: false, turnsLeft: 0 }, shielded: 0 },
+    challenged: { id: challenged, health: 100, speed: 8, defense: 7, agility: 6, mana: 100, cooldowns: {}, clone: false, poison: { active: false, turnsLeft: 0 }, shielded: 0 },
+    turn: challenger,
+    progress: false
+});
+
+const checkWin = (duel) => {
+    if (duel.challenger.health <= 0) return duel.challenged.id;
+    if (duel.challenged.health <= 0) return duel.challenger.id;
+    return null;
+};
+
+const formatStatus = (duel) => `
+🧙 **Status Board** 🧙
+**Challenger:**
+❤️ Health: ${duel.challenger.health} HP
+⚡ Speed: ${duel.challenger.speed} SPD
+🛡️ Defense: ${duel.challenger.defense} DEF
+👟 Agility: ${duel.challenger.agility} AGI
+🔮 Mana: ${duel.challenger.mana} MP
+🛡️ Shield: ${duel.challenger.shielded > 0 ? duel.challenger.shielded + " DEF for " + duel.challenger.shielded + " turns" : "None"}
+☠️ Poison: ${duel.challenger.poison.active ? duel.challenger.poison.turnsLeft + " turns left" : "None"}
+🪄 Clone: ${duel.challenger.clone ? "Active" : "None"}
+
+**Challenged:**
+❤️ Health: ${duel.challenged.health} HP
+⚡ Speed: ${duel.challenged.speed} SPD
+🛡️ Defense: ${duel.challenged.defense} DEF
+👟 Agility: ${duel.challenged.agility} AGI
+🔮 Mana: ${duel.challenged.mana} MP
+🛡️ Shield: ${duel.challenged.shielded > 0 ? duel.challenged.shielded + " DEF for " + duel.challenged.shielded + " turns" : "None"}
+☠️ Poison: ${duel.challenged.poison.active ? duel.challenged.poison.turnsLeft + " turns left" : "None"}
+🪄 Clone: ${duel.challenged.clone ? "Active" : "None"}
+`;
+
+const formatSpells = () => {
+    let spellList = "📜 **Available Spells** 📜\n";
+    for (const [spell, details] of Object.entries(spells)) {
+        spellList += `*${spell}* - ${details.description} (Cooldown: ${details.cooldown} turns)\n`;
+    }
+    return spellList;
+};
+
+const calculateDamage = (spell, player, opponent) => {
+    let damage = spell.damage || 0;
+    if (spell.bypassDefense) return damage;
+    if (opponent.shielded > 0) {
+        damage -= opponent.shielded;
+    } else {
+        damage -= opponent.defense;
+    }
+    return damage > 0 ? damage : 0;
+};
+
+const applyEffects = (firstPlayer, secondPlayer, firstSpell, secondSpell) => {
+    // First player's action
+    if (spells[firstSpell].damage) {
+        secondPlayer.health -= calculateDamage(spells[firstSpell], firstPlayer, secondPlayer);
+    } else if (spells[firstSpell].heal) {
+        firstPlayer.health += spells[firstSpell].heal;
+    }
+
+    // Check if second player is still alive
+    if (secondPlayer.health > 0) {
+        // Second player's action
+        if (spells[secondSpell].damage) {
+            firstPlayer.health -= calculateDamage(spells[secondSpell], secondPlayer, firstPlayer);
+        } else if (spells[secondSpell].heal) {
+            secondPlayer.health += spells[secondSpell].heal;
+        }
+    }
+};
+
+module.exports = {
+    name: "duel",
+    aliases: ["wizardduel"],
+    exp: 5,
+    cool: 5,
+    react: "✅",
+    category: "games",
+    description: "Use :duel challenge @tag / :duel accept / :duel spell (spell_name) / :duel forfeit / :duel guide",
+    async execute(client, arg, M) {
+        const args = arg.split(' ');
+        const command = args[0];
+        const challenger = M.sender;
+        const challenged = M.mentions[0] || (M.quoted && M.quoted.participant);
+
+        if (!command) {
+            return client.sendMessage(
+                M.from,
+                { text: '⚠️ **No command provided. Use** \`:duel guide\` **for instructions on how to play.**' }
+            );
+        }
+
+        if (command === 'guide') {
+            return client.sendMessage(
+                M.from,
+                { text: `
+                    🎮 **Wizard Duel Game Guide** 🎮
+                    - \`:duel challenge @tag\`: Challenge someone to a Wizard Duel.
+                    - \`:duel accept\`: Accept a challenge.
+                    - \`:duel spell (spell_name)\`: Cast a spell (fireball, lightning, heal, clone, void).
+                    - \`:duel forfeit\`: Forfeit the current game.
+
+                    **Game Details:**
+                    - Both players start with 100 health points, speed, and defense.
+                    - Players take turns to cast spells.
+                    - Spells have cooldown periods before they can be used again.
+                    - The first player to reduce the opponent's health to 0 wins.
+                    - Speed determines who goes first at the start.
+                    - Defense reduces incoming damage.
+                ` }
+            );
+        } else if (command === 'challenge') {
+            if (!challenged || challenged === challenger) {
+                return client.sendMessage(
+                    M.from,
+                    { text: '⚠️ **You must tag someone to challenge.**' }
+                );
+            }
+
+            if (duelMap.has(challenger) || duelMap.has(challenged)) {
+                return client.sendMessage(
+                    M.from,
+                    { text: '⚠️ **One or both players are already in a duel.**' }
+                );
+            }
+
+            duelMap.set(challenged, createDuel(challenger, challenged));
+
+            client.sendMessage(
+                M.from,
+                { text: `🎮 **Wizard Duel Challenge!** 🎮\n\n@${challenged.split('@')[0]}, you have been challenged by @${challenger.split('@')[0]} to a Wizard Duel. Use \`:duel accept\` to accept or \`:duel forfeit\` to decline.` }
+            );
+        } else if (command === 'accept') {
+            const duel = duelMap.get(challenger);
+
+            if (!duel || duel.challenged.id !== challenger) {
+                return client.sendMessage(
+                    M.from,
+                    { text: '⚠️ **No pending duel to accept.**' }
+                );
+            }
+
+            duel.progress = true;
+            duelMap.set(duel.challenger.id, duel);
+            duelMap.set(duel.challenged.id, duel);
+
+            client.sendMessage(
+                M.from,
+                { text: `🎮 **Duel Starts Now!** 🎮\n\n${formatSpells()}` }
+            );
+        } else if (command === 'spell') {
+            const spell = args[1];
+            const duel = duelMap.get(challenger);
+
+            if (!duel || !duel.progress) {
+                return client.sendMessage(
+                    M.from,
+                    { text: '⚠️ **You are not in a duel or the duel has not started.**' }
+                );
+            }
+
+            if (!spell || !spells[spell]) {
+                return client.sendMessage(
+                    M.from,
+                    { text: '⚠️ **Invalid spell. Use \`:duel guide\` for available spells.**' }
+                );
+            }
+
+            const player = duel.challenger.id === challenger ? duel.challenger : duel.challenged;
+            const opponent = duel.challenger.id === challenger ? duel.challenged : duel.challenger;
+
+            if (player.cooldowns[spell] && player.cooldowns[spell] > 0) {
+                return client.sendMessage(
+                    M.from,
+                    { text: '⚠️ **Spell is on cooldown. Try a different spell.**' }
+                );
+            }
+
+            const [firstPlayer, secondPlayer] = determineTurnOrder(player, opponent, spell, '');  // Pass the chosen spell for order determination
+            const firstSpell = spell;
+            const secondSpell = '';  // Assuming the opponent didn't choose a spell yet
+
+            applyEffects(firstPlayer, secondPlayer, firstSpell, secondSpell);
+
+            player.cooldowns[spell] = spells[spell].cooldown;
+
+            const winner = checkWin(duel);
+
+            if (winner) {
+                duelMap.delete(duel.challenger.id);
+                duelMap.delete(duel.challenged.id);
+
+                return client.sendMessage(
+                    M.from,
+                    { text: `🎉 **Duel Over!** 🎉\n\nWinner: @${winner.split('@')[0]}` }
+                );
+            }
+
+            return client.sendMessage(
+                M.from,
+                { text: formatStatus(duel) }
+            );
+        } else if (command === 'forfeit') {
+            const duel = duelMap.get(challenger);
+
+            if (!duel || !duel.progress) {
+                return client.sendMessage(
+                    M.from,
+                    { text: '⚠️ **You are not in a duel or the duel has not started.**' }
+                );
+            }
+
+            duelMap.delete(duel.challenger.id);
+            duelMap.delete(duel.challenged.id);
+
+            const opponent = duel.challenger.id === challenger ? duel.challenged : duel.challenger;
+
+            return client.sendMessage(
+                M.from,
+                { text: `🎮 **Duel Over!** 🎮\n\n@${challenger.split('@')[0]} has forfeited. Winner: @${opponent.id.split('@')[0]}` }
+            );
+        } else {
+            return client.sendMessage(
+                M.from,
+                { text: '⚠️ **Unknown command. Use \`:duel guide\` for instructions.**' }
+            );
+        }
+    }
+};
