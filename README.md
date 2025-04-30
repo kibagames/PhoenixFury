@@ -414,12 +414,7 @@ since **whatsapp-bot** use [baileys](https://github.com/WhiskeySockets/Baileys) 
 <h2 align="center">🔰 Meet Team Aurora🔰
 </h2>
 
-| [![Uchiha shisui](https://github.com/Kingshisui00.png)](https://github.com/Kingshisui00) shisui | [![The lost uchiha](https://github.com/GodxMadara.png)](https://github.com/GodxMadara) lucky |
-|--- | --- |
-| [shisui](https://github.com/Kingshisui00) Owner, developer, monthly maintainer,  function developer |  [lucky](https://github.com/Kingshisui00) co-Owner, developer, baileys and dependencies maintainer,  function developer |
 
-
-## ᴛʜᴀɴᴋꜱ ᴛᴏ
 
 
 ## USER DEPARTMENT (some are mandetory)
