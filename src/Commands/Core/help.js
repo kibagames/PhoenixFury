@@ -43,7 +43,7 @@ module.exports = {
           commands += `🌟 *${client.utils.capitalize(category, true)}*\n➖➖➖➖\n\`\`\`${categories[category].join(', ')}\`\`\`\n\n`;
         }
 
-        let message = `${greeting}, *${pushName}* 🌺!\n\n✨ *Welcome to Aurora Bot* ✨\nHere’s the list of available commands:\n\n${commands}`;
+        let message = `${greeting}, *${pushName}* 🌺!\n\n✨ *Welcome to yurie Bot* ✨\nHere’s the list of available commands:\n\n${commands}`;
         message += `\n📌 *Notes:*\n1️⃣ To join the official support group, type: *${client.prefix}support*\n2️⃣ For command details, use: *${client.prefix}command <command_name>*\n\n🔖 _Powered by Team Aurora_ 🌈`;
 
         await client.sendMessage(
