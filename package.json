@@ -1,8 +1,8 @@
 {
-   "name": "muzan",
+   "name": "yurie",
    "version": "0.0.1",
-   "description": "Muzan based on JavaScript",
-   "author": "JFLEX-OG",
+   "description": "yurie based on JavaScript",
+   "author": "PhoenixFury",
    "main": "src/muzan.js",
    "keywords": [
      "Whatsapp",
