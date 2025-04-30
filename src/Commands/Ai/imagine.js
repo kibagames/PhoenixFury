@@ -46,8 +46,8 @@ module.exports = {
                 caption: `🎨 Image generated successfully!`,
                 contextInfo: {
                     externalAdReply: {
-                        title: `Aurora Image Generater`,
-                        body: 'Aurora 2025',
+                        title: `yurie Image Generater`,
+                        body: 'yurie 2025',
                         mediaType: 2,
                         thumbnail: thumbnail,
                         sourceUrl: ''
