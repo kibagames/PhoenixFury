@@ -419,7 +419,6 @@ since **whatsapp-bot** use [baileys](https://github.com/WhiskeySockets/Baileys) 
 
 ## USER DEPARTMENT (some are mandetory)
 - This is the miniature model of our private cardgame bot.
-- visit our website https://kingshisui00.github.io/web-aurora/
 - if you spot any comment statments which starts with // read those either they can be the details of that code or there you will be asked to replace or provide your values.
 - If you want to create commamds there is the command example file in src that will help you.
 - If you are facing problems at anything go through every md in our bot so that might help you.
