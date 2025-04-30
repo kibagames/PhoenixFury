@@ -37,8 +37,8 @@ module.exports = {
                     text: `📝 *Here is the analyzed text from the image:*\n\n${parsedText || 'No text detected.'}`,
                     contextInfo: {
                         externalAdReply: {
-                            title: `Aurora Image Analyser`,
-                            body: 'Aurora 2025',
+                            title: `yurie Image Analyser`,
+                            body: 'yurie 2025',
                             mediaType: 2,
                             thumbnail: thumbnail,
                             sourceUrl: ''
