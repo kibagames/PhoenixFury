@@ -16,7 +16,7 @@ module.exports = {
         ];
 
         // Intro text for the bot list
-        let text = `🤖 *Aurora Bots* 🤖\n\n`;
+        let text = `🤖 *yurie Bots* 🤖\n\n`;
 
         // Loop through each bot and add their name and wa.me/ number link
         bots.forEach(bot => {
