@@ -44,7 +44,7 @@ module.exports = {
         }
 
         let message = `${greeting}, *${pushName}* 🌺!\n\n✨ *Welcome to yurie Bot* ✨\nHere’s the list of available commands:\n\n${commands}`;
-        message += `\n📌 *Notes:*\n1️⃣ To join the official support group, type: *${client.prefix}support*\n2️⃣ For command details, use: *${client.prefix}command <command_name>*\n\n🔖 _Powered by Team Aurora_ 🌈`;
+        message += `\n📌 *Notes:*\n1️⃣ To join the official support group, type: *${client.prefix}support*\n2️⃣ For command details, use: *${client.prefix}command <command_name>*\n\n🔖 _Powered by Team yurie_ 🌈`;
 
         await client.sendMessage(
           M.from,
