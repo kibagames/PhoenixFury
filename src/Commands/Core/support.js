@@ -12,26 +12,24 @@ module.exports = {
           // Group links message
           const supportG = `*━『 Aurora Group Links 』━*
           
-• *[ Aurora Support ]*
-Link: https://chat.whatsapp.com/LfP92QqDOZv4xqHjVfwjdJ
+• *[ yurie Support ]*
+Link: https://chat.whatsapp.com/FpJ4aiTVkyHHtqTIR960xX
 
-• *[ Aurora Auction ]*
-Link: https://chat.whatsapp.com/DvUlhUJIypEI3PaLgaYcn6
+• *[ yurie Auction ]*
+Link: https://chat.whatsapp.com/LAfV7XSyFkU7EgNntxdWyj
 
-• *[ Aurora Casino ]*
-Link: https://chat.whatsapp.com/HQYq49kB59J9BDHrzJUkiT
+• *[ yurie Casino ]*
+Link: https://chat.whatsapp.com/InFdCK65EaW4YhqBFHmWep
 
-• *[ Aurora Games ]*
-Link: https://chat.whatsapp.com/HpJAi81LONm8VTQjAzlBjy
+• *[ yurie main ]*
+Link: https://chat.whatsapp.com/L3J8tp04lzUBZbd1bTitSI
 
-• *[ Aurora Quest ]*
-Link: https://chat.whatsapp.com/ReplaceWithActualLink
 
-• *[ Aurora Battles ]*
-Link: https://chat.whatsapp.com/ReplaceWithActualLink
+• *[ yurie Battles ]*
+Link: https://chat.whatsapp.com/CZJTJsXlGiS1GHSLFrCJlF
 
-• *[ Aurora General ]*
-Link: https://chat.whatsapp.com/JwXQf1qBkGDLCbugc22UVt`;
+• *[ yurie General ]*
+Link: https://chat.whatsapp.com/Iivfl5q0F7v57jyTZep4a8
 
           // Notify the user in the group
           await client.sendMessage(M.from, { text: `*🟩 DMed you the group links.*` }, { quoted: M });
