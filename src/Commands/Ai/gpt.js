@@ -33,7 +33,7 @@ module.exports = {
                     contextInfo: {
                         externalAdReply: {
                             title: `OpenAI GPT-4`,
-                            body: 'Aurora 2024- AI Companion',
+                            body: 'yurie 2025- AI Companion',
                             mediaType: 2,
                             thumbnail: thumbnail,
                             sourceUrl: ''
