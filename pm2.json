@@ -7,7 +7,7 @@
       "env": {
         "NODE_ENV": "development",
         "NAME": "hinata",
-        "PREFIX": ":",
+        "PREFIX": "/",
         "MODS ": "917973456275",
         "PORT": "3001",
         "SESSION": "hinata50",
@@ -21,7 +21,7 @@
       "env": {
         "NODE_ENV": "development",
         "NAME": "mikasa",
-        "PREFIX": ":",
+        "PREFIX": "/",
         "MODS": "917973456275",
         "PORT": "3003",
         "SESSION": "mikasa50",
