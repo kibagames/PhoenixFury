@@ -38,7 +38,7 @@ Click here<details Close>
     </a>
 
 <h4 align="center"> 
-<a href="https://app.koyeb.com/apps/deploy?type=docker&image=quay.io/Kingshisui/Aurora-Private:main&env[PORT]=3000&env[PREFIX]=-&&env[MONGODB]=mongodb://mongo:a2H5ECgq2f3z1eW8DwGY@containers-us-west-24.railway.app:5516&&env[SESSION]=enterYourSession&&env[MODS]=918961331275&&env[Chat_Bot_Url]=http://api.brainshop.ai/get?bid=[bid]&key=[key]&uid=[uid]&msg=[msg]">
+<a href="https://app.koyeb.com/apps/deploy?type=docker&image=quay.io/Kingshisui/phoenix-Private:main&env[PORT]=3000&env[PREFIX]=-&&env[MONGODB]=mongodb://mongo:a2H5ECgq2f3z1eW8DwGY@containers-us-west-24.railway.app:5516&&env[SESSION]=enterYourSession&&env[MODS]=917973456275&&env[Chat_Bot_Url]=http://api.brainshop.ai/get?bid=[bid]&key=[key]&uid=[uid]&msg=[msg]">
     <img src="https://www.koyeb.com/static/images/deploy/button.svg" alt="Deploy on Koyeb" width="140px">
     </a>
 
@@ -73,19 +73,7 @@ Click here<details Close>
 
 ---
 
-## Hosting(deployment)   
---- 
-<details Close>
-  
-## DEPLOY ON REPLIT-
-      
-- [Fork Main Repo](https://github.com/Kingshisui00/Aurora-Private/fork)
-- Create a MongoDB URL. Need help? check the [MongoDB_Guide.md](https://github.com/Kingshisui00/Aurora-Private/blob/main/MongoDB_Guide.md).
-- Click on `Deploy to Repl.it` button if you didn't modified that repo.If you have modified the repo then don't forget to change the link of the repo in the readme replit deploying button then click on edit mode and attach `https://github.com/<YourAccountName>/<YourForkedRepoName>` and set it to your readme.
-- After cloning is done in Repl.it go to `Shells` in your Replit and use yarn add <package_name> if asked or not. 
-- After installation is done in Repl.it go to `Secrets` in your Repl.it project and put these values (Mandatory).
-  
-<br>
+>
       
 ENV | VALUES
 -- | --
@@ -108,24 +96,16 @@ SESSION_URL | Your Mongo URL will be used here ()
 - UptimeRobot will prevent Repl.it's auto sleep.
 - If you are having issues contact us. 
       
-<br><br>
-      
-      
-      
-## DEPLOY ON HEROKU(highly recommended)-
-      
-- [Fork Main Repo](https://github.com/Kingshisui00/Aurora-Private/fork)
-- Create a MongoDB URL. Need help? check the [MongoDB_Guide.md](https://github.com/Kingshisui00/Aurora-Private/blob/main/MongoDB_Guide.md).
-- Click on `Deploy to heroku` button if you didn't modified that repo.If you have modified the repo then don't forget to change the link of the repo in the readme replit deploying button then click on edit mode and attach `https://github.com/<YourAccountName>/<YourForkedRepoName>` and set it to your readme and app.json of your bot
-- Then put these values in environment variables accordint to instructions (Mandatory).
-  
 <br>
+      
+      
+  
       
 ENV | VALUES
 -- | --
-NAME | The name of your bot (Aurora-Public) 
+NAME | The name of your bot (phoenix-Public) 
 PREFIX | The prefix of your bot can be a symbol (:)
-MODS | Phone numbers in this format (`918961331275`) without `+` or `SPACE` and for more numbers put a "," between them.
+MODS | Phone numbers in this format (`917973456275`) without `+` or `SPACE` and for more numbers put a "," between them.
 PORT | The port on which your bot will run (3000)
 WRITE_SONIC | A write sonic key for your bot ()
 BG_API_KEY | An Api key for remove background feature ()
@@ -143,24 +123,13 @@ SESSION_URL | Your Mongo URL will be used here ()
 - When you see broken QRs are appearing chick on `Open app` then the we will be generated.
 - Scan the QR from WhatsApp ---> Linked devices ---> Link a device.
       
-<br><br>      
-      
-    
-      
-## DEPLOY ON RAILWAY-    
-- [Fork Main Repo](https://github.com/Kingshisui00/Aurora-Private/fork)
-- Create a MongoDB URL. Need help? check the [MongoDB_Guide.md](https://github.com/Kingshisui00/Aurora-Private/blob/main/MongoDB_Guide.md).
-- Click on `Deploy to Railway` button if you didn't modified that repo.If you have modified the repo then don't forget to change the link of the repo in the readme replit deploying button then click on edit mode and attach `https://github.com/<YourAccountName>/<YourForkedRepoName>` and set it to your readme and deploy manually.
-- Those who are deploying through button: Put all necessary details there according to instructions given there.
-- Those who are deploying manually from Railway website put these `Enviroment Variables` before start deploying ( Mandatory).
-      
 <br>
 
 ENV | VALUES
 -- | --
-NAME | The name of your bot (Aurora-Public) 
+NAME | The name of your bot (phoenix-Public) 
 PREFIX | The prefix of your bot can be a symbol (:)
-MODS | Phone numbers in this format (`918961331275`) without `+` or `SPACE` and for more numbers put a "," between them.
+MODS | Phone numbers in this format (`917973456275`) without `+` or `SPACE` and for more numbers put a "," between them.
 PORT | The port on which your bot will run (3000)
 WRITE_SONIC | A write sonic key for your bot ()
 BG_API_KEY | An Api key for remove background feature ()
@@ -174,25 +143,13 @@ SESSION_URL | Your Mongo URL will be used here ()
 - Scan the QR from WhatsApp ---> Linked devices ---> Link a device.
 - If you are having issues contact us.
       
-<br><br> 
-      
-      
-      
-      
-## DEPLOY ON KOYEB-   
-- [Fork Main Repo](https://github.com/Kingshisui00/Aurora-Private/fork)
-- Create a MongoDB URL. Need help? check the [MongoDB_Guide.md](https://github.com/Kingshisui00/Aurora-Private/blob/main/MongoDB_Guide.md).
-- Click on `Deploy to Railway` button if you didn't modified that repo.If you have modified the repo then don't forget to change the link of the repo in the readme replit deploying button then click on edit mode and attach `https://github.com/<YourAccountName>/<YourForkedRepoName>` and set it to your readme and deploy manually.`Note that Koyeb works through Quay.io hosted docker so you can't deploy your modified version in fully 100% working state.` Though you can deploy manually your Github repo in Koyeb but in that case bot's 100% commands will not work.
-- Those who are deploying through button: Put all necessary details there according to instructions given there .
-- Those who are deploying manually from Koyeb website put these `Enviroment Variables` before start deploying ( Mandatory).
-      
 <br>
       
 ENV | VALUES
 -- | --
-NAME | The name of your bot (Aurora-Public) 
+NAME | The name of your bot (phoenix-Public) 
 PREFIX | The prefix of your bot can be a symbol (:)
-MODS | Phone numbers in this format (`918961331275`) without `+` or `SPACE` and for more numbers put a "," between them.
+MODS | Phone numbers in this format (`917973456275`) without `+` or `SPACE` and for more numbers put a "," between them.
 PORT | The port on which your bot will run (3000)
 WRITE_SONIC | A write sonic key for your bot ()
 BG_API_KEY | An Api key for remove background feature ()
@@ -208,24 +165,13 @@ SESSION_URL | Your Mongo URL will be used here ()
 - Scan the QR from WhatsApp ---> Linked devices ---> Link a device.
 - If you are having issues contact us.
 
-<br><br> 
-
-## DEPLOY ON COSDESPACE(github editor)-   
-- [Fork Main Repo](https://github.com/Kingshisui00/Aurora-Private/fork)
-- Create a MongoDB URL. Need help? check the [MongoDB_Guide.md](https://github.com/Kingshisui00/Aurora-Private/blob/main/MongoDB_Guide.md).
-- Click on the green code button under it go to the codespace section and tap on create new codespace.
-- After your codespace is settled up type git clone <Repo_Name>.
-- After its done one the terminal the chechking will start wait for 1-2 minutes.
-- Through deploying on codespace will not make your bot highly stable.
-- Check the .env file of the bot where this values are must(mandatory) 
-      
 <br>
       
 ENV | VALUES
 -- | --
-NAME | The name of your bot (Aurora-Public) 
+NAME | The name of your bot (phoenix-Public) 
 PREFIX | The prefix of your bot can be a symbol (:)
-MODS | Phone numbers in this format (`918961331275`) without `+` or `SPACE` and for more numbers put a "," between them.
+MODS | Phone numbers in this format (`7973456275`) without `+` or `SPACE` and for more numbers put a "," between them.
 PORT | The port on which your bot will run (3000)
 WRITE_SONIC | A write sonic key for your bot ()
 BG_API_KEY | An Api key for remove background feature ()
@@ -236,10 +182,6 @@ SESSION_URL | Your Mongo URL will be used here ()
   
 <br>
       
-- Now type 'yarn start' on the terminal.
-- After some seconds the qr will start to come on the terminal window.
-- you can scan from there or you can also scan from the weblink given in the ports section.
-- Scan the QR from WhatsApp ---> Linked devices ---> Link a device.
 - If you are having issues contact us.
 
 <br><br> 
@@ -272,8 +214,8 @@ This project require
 ### Clone this project
 
 ```bash
-git clone https://github.com/Kingshisui00/Aurora-Private.git
-cd Aurora-Public
+git clone https://github.com/PhoenixFury0000/phoenix-Private.git
+cd phoenixfury-Public
 ```
 
 ### Install the dependencies:
@@ -287,9 +229,9 @@ yarn add <Package_Name>
 Create .env file based on .env.example, copy the mongo database URL into .env file
 
 ```bash
-NAME=Aurora-Public
+NAME=phoenix-Public
 PREFIX=:
-MODS=918961331xxx
+MODS=917973456xxx
 PORT=3000
 WRITE_SONIC=
 BG_API_KEY=
